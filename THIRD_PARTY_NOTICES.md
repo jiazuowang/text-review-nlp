@@ -22,4 +22,4 @@ The style-feature design was informed by Park et al., *KatFishNet: Detecting LLM
 
 ## Project contributions
 
-The project is group work developed with Codex assistance. Contributor-specific public attribution will be added after preferences are confirmed. No blanket project license is assigned here on behalf of other contributors or upstream rights holders.
+See the README for individual work and team acknowledgements. Contributor names will be added after preferences are confirmed. Licensing of group contributions requires the contributors' agreement; upstream resources retain their own terms.

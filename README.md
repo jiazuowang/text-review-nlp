@@ -4,7 +4,7 @@
 
 Text Review compares lexical and writing-style features for classifying human-written and machine-generated English text. It connects the experiments to a local application with document import, model comparison, passage-impact inspection, draft comparison, batch processing, and report export.
 
-This is a portfolio edition of a group NLP course project. It includes the trained models and runtime resources, so the application can run after installing dependencies. Original dataset texts, course submissions, personal details, and machine-specific logs are excluded.
+This group NLP project includes trained models and runtime resources. Install the dependencies to run the application locally.
 
 ## Run the application
 
@@ -55,17 +55,15 @@ The original grouped split contained 2,318 training, 492 validation, and 506 tes
 | Writing Style | 70.36% | 0.7015 | Frozen baseline, 506 documents |
 | Combined Features | 77.47% | 0.7708 | Follow-up on the already-used test partition |
 
-These are recorded course experiments, not universal detector performance. The combined model was developed after the baseline test evaluation; its result is not an independent confirmation of improvement. Aggregate records are in [results](results/).
+These results describe the course dataset. The combined model was developed after baseline test evaluation, so its improvement needs confirmation on a fresh test set. Aggregate records are in [results](results/).
 
-Raising the classification threshold reduces false positives but also misses more machine-generated documents. Scores are model responses, not the percentage of AI-written content. Sentence-deletion highlighting measures prediction sensitivity; it does not establish sentence authorship. The models were evaluated on 50–1,000-word English documents, although the application accepts other non-empty lengths.
+The threshold controls the trade-off between false positives and missed detections. Scores express model responses; sentence-deletion highlights show prediction sensitivity. Neither establishes authorship. Evaluation covered 50–1,000-word English documents. See the [model card](MODEL_CARD.md) for interpretation and limits.
 
 ## My contribution and team acknowledgements
 
-I proposed the project idea and workflow after discussion with my teammates, and used Codex as a development assistant to lead the initial implementation. My work covered literature research, dataset preparation, baseline and follow-up experiments, application integration, evaluation materials, reproducible packages, and a draft demonstration script.
+I proposed the idea and workflow after discussion with my teammates and led the initial prototype. My work covered literature research, dataset preparation, model experiments, application integration, progress reports and a draft demonstration script. I used Codex for development assistance.
 
-Thanks to my teammates for subsequent code and documentation revisions, demonstration preparation, and final video production. Individual names and account links are omitted until teammates confirm their preferred public attribution. This is a group project, and this repository does not claim sole authorship of all work.
-
-The public edition adds release documentation, synthetic demonstration input, and a test entry point that identifies the dataset-dependent check. The trained model files and application algorithms are preserved.
+My teammates contributed subsequent code and documentation revisions, demonstration preparation and final video production. Individual credits will be added after teammates confirm their preferred public attribution.
 
 ## Verification and reproduction
 
@@ -81,4 +79,4 @@ The original training/evaluation source is included for inspection. Exact retrai
 
 The experiments use [Beemo](https://github.com/Toloka/beemo) and its [paper](https://aclanthology.org/2025.naacl-long.357/). Style-feature design was informed by [KatFishNet](https://aclanthology.org/2025.acl-long.1030/). The application bundles the NLTK English POS resource and DejaVu font fallbacks with their notices.
 
-See [third-party notices](THIRD_PARTY_NOTICES.md) for source and licensing distinctions. No blanket license is asserted over the group contribution or upstream data. This release is presented for portfolio and research review.
+See [third-party notices](THIRD_PARTY_NOTICES.md) for attribution and reuse conditions. The original text corpus and course submission documents are excluded. Licensing of group contributions requires the contributors' agreement.
