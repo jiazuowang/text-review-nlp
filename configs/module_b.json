@@ -1,0 +1,11 @@
+{
+  "seed": 42,
+  "selection_metric": "macro_f1",
+  "threshold": 0.5,
+  "ngram_ranges": [[1, 1], [1, 2]],
+  "min_df": [2, 5],
+  "C": [0.1, 1.0, 10.0],
+  "class_weight": [null, "balanced"],
+  "max_features": 50000,
+  "max_iter": 2000
+}

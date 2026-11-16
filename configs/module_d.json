@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "split": "val",
+  "seed": 42,
+  "review_fraction": 0.2,
+  "length_ratio_review_bounds": [0.5, 1.5],
+  "threshold": 0.5,
+  "example_count": 5,
+  "detectors": ["B", "C"],
+  "conditions": ["expert", "gpt-4o:P1", "gpt-4o:P2", "gpt-4o:P3", "llama-3.1-70b:P1", "llama-3.1-70b:P2", "llama-3.1-70b:P3"]
+}

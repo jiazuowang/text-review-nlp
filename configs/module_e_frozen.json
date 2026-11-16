@@ -1,0 +1,87 @@
+{
+  "module": "E",
+  "status": "protocol_frozen_before_test_inference",
+  "created_utc": "2026-11-13T17:00:46.742465+00:00",
+  "positive_label": 1,
+  "default_threshold": 0.5,
+  "low_FPR_target": 0.05,
+  "low_FPR_thresholds": {
+    "B": {
+      "threshold": 0.6422273813738966,
+      "human_count": 216,
+      "AI_count": 276,
+      "false_positives": 10,
+      "true_positives": 84,
+      "validation_FPR": 0.046296296296296294,
+      "validation_TPR": 0.30434782608695654
+    },
+    "C": {
+      "threshold": 0.7522549703192121,
+      "human_count": 216,
+      "AI_count": 276,
+      "false_positives": 10,
+      "true_positives": 86,
+      "validation_FPR": 0.046296296296296294,
+      "validation_TPR": 0.3115942028985507
+    }
+  },
+  "threshold_selection": "Maximize validation AI true positives subject to human FP <= floor(0.05*n_human); ties minimize FP then maximize threshold; predict AI iff score >= threshold.",
+  "primary_models": [
+    "B",
+    "C"
+  ],
+  "main_test": "Frozen eligible human and ai_raw test partition",
+  "edited_test": "All frozen pair-eligible test edits, all seven published conditions; retain all attempts and source quality flags.",
+  "main_metrics": [
+    "accuracy",
+    "precision",
+    "recall",
+    "FPR",
+    "F1",
+    "macro_F1",
+    "AUROC"
+  ],
+  "edited_metrics": [
+    "TPR",
+    "miss_rate",
+    "mean_score_change",
+    "AI_to_human_flip",
+    "human_to_AI_flip"
+  ],
+  "weighting": [
+    "per_text",
+    "equal_group_weight"
+  ],
+  "bootstrap": {
+    "unit": "group_id",
+    "replicates": 1000,
+    "seed": 42,
+    "CI": [
+      0.025,
+      0.975
+    ],
+    "paired_model_differences": true
+  },
+  "runtime": "Record CPU/RAM/threads and text lengths; separate load time, warmed single-text median/P95, batch throughput.",
+  "error_examples": "Deterministic SHA256(42|sample_id) order; up to 10 false positives and 10 false negatives per detector at 0.5.",
+  "optional_extensions": [
+    "C feature ablations",
+    "external domain evaluation",
+    "custom edits",
+    "augmentation"
+  ],
+  "test_tuning": "Frozen protocol; implementation corrections and reruns must be logged.",
+  "input_sha256": {
+    "artifacts/module_b/validation_predictions.csv": "7a0468ba9ea7516595eb7c9028bca3c946715c96134f0d359d5417a0d12d9b63",
+    "artifacts/module_b/pipeline.joblib": "fcc52c7bed5e0ebb188fb906e789d250553ef1c65a8824c19dfa0cfd47877f3f",
+    "artifacts/module_b/run.json": "0835a7b2a44fd8082705c6b1661cf5f74a1b27fb6f8f95cda08a97df37c1b48f",
+    "artifacts/module_c/full_validation_predictions.csv": "5286b349196c158afcfaf496c0188b7630b8ef5ce2ff3ae0f1c4dda416d93985",
+    "artifacts/module_c/pipeline.joblib": "1d67350027c7d3f0f97b72d15b518566cf65a1cc2688c0a9ff9677884c93d004",
+    "artifacts/module_c/run.json": "6924f6400be0b153d6c5e64355eb7d108eac679cbc403e2a4d6f854f7451cbdf",
+    "CHECKSUMS.json": "c870e981b505743e6a7fb93a2495cb809a901de2943c18f488aabef0c2662a06",
+    "data/processed/split_manifest.csv": "539067fad61539809929ad12b4d5b54ec8fc2226d525480c01d27e0354968811",
+    "data/processed/texts.parquet": "1c41cd1cd3f342d992b0a7c8037710ba417b423025994e240a10d07951bdbdc5",
+    "data/module_d/ai_review_decisions.jsonl": "34de5c0de58d860bc87962d358873bc85967b1fb47209ce19b03f721afa21b60",
+    "scripts/freeze_module_e.py": "c8ecc966a8270e0de94103a1f1d76176b51426203a572aad856d9529a03bd7ce"
+  }
+}

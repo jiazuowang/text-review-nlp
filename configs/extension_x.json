@@ -1,0 +1,22 @@
+{
+  "name": "X: model and local analysis extension",
+  "seed": 42,
+  "selection": "validation macro_F1 at 0.5; ties earliest candidate",
+  "representations": ["char", "word_char", "word_char_style"],
+  "C": [0.5, 2.0, 8.0, 32.0],
+  "class_weight": [null, "balanced"],
+  "char_ngram_range": [3, 5],
+  "word_ngram_range": [1, 2],
+  "char_max_features": 60000,
+  "word_max_features": 40000,
+  "min_df": 2,
+  "extra_trees_min_samples_leaf": [2, 5],
+  "extra_trees_max_features": ["sqrt", 1.0],
+  "boosting_max_leaf_nodes": [7, 15],
+  "boosting_l2_regularization": [1.0, 10.0],
+  "bootstrap_repeats": 1000,
+  "test_status": "E test results were seen before extension design; subsequent comparisons are follow-up evaluation",
+  "local_analysis": "Sentence deletion impact, fixed-length contextual windows, concrete surface editing suggestions",
+  "local_validation": "Up to 30 validation groups with human and AI originals >=120 English words; four alternating 60-word source blocks; diagnostic synthetic mixed texts",
+  "external_unseen_evaluation": "Requires additional source data; outside this execution protocol"
+}

@@ -1,0 +1,20 @@
+LINGUISTIC FEATURE METHODS
+
+Park et al. KatFishNet. ACL 2025.
+https://aclanthology.org/2025.acl-long.1030/
+Official implementation: https://github.com/Shinwoo-Park/katfishnet
+
+This project adapts POS n-gram diversity and comma position/frequency features
+to English Beemo text. English words follow a fixed regular expression; sentence
+boundaries follow punctuation and line breaks. NLTK uses Penn Treebank POS labels.
+POS n-grams are constructed within sentences. Diversity is the number of distinct
+sequences divided by the total number of sequences. Comma frequency uses English
+word count; relative position is words before the comma divided by sentence words.
+Comma POS pairs use adjacent token tags, skipping commas with a missing neighbor.
+Noun NN*, verb VB*/MD, adjective JJ*, adverb RB* and pronoun PRP*/WP* proportions
+use word and number tokens as the denominator. The complete feature schema records
+all 32 measurements. Five feature groups each compare six forest settings.
+
+Official POS source: https://github.com/nltk/nltk_data
+ZIP Git blob SHA1: b792e19546a5711218a05f4029ef17c8d62cd839
+Resource files, hashes and license notices are included.

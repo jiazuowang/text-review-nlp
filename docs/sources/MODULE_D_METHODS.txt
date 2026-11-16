@@ -1,0 +1,28 @@
+Module D: published-edit adapter and validation analysis
+
+Source: Toloka/beemo, revision cca3b817eb6d0bf7a60f885f3022696553eabb63.
+The bundled BEEMO_README.md contains the source editing prompts P1/P2/P3 and dataset documentation. Source licensing is recorded in BEEMO_LICENSE.txt.
+The adapter reads the frozen validation projection, checks hashes and metadata, joins each edited sample to parent_id, and checks origin label, group and split. All 2,310 candidate pairs enter pair_audit.csv; 1,820 satisfy the frozen parent/edit eligibility rules. All analyses use origin label 1 for these AI-derived texts.
+Conditions: expert; gpt-4o:P1, P2, P3; llama-3.1-70b:P1, P2, P3. Exact service model snapshots, temperatures and generation timestamps are unavailable in the imported records. generation_manifest.jsonl records available editor identifiers, source revision and text hashes. Custom text generation was not run.
+
+Modification measures
+English word regex: [A-Za-z]+(?:['’\-][A-Za-z]+)*. Words are lowercased for edit distance. Token insertion, deletion and substitution each cost 1. The Myers bit-vector implementation computes exact Levenshtein distance; tests compare 250 random cases with a separate dynamic-programming reference. Normalized distance = distance / max(original words, edited words, 1). Length ratio = edited words / original words. These word sequences omit punctuation and numbers; separate checks track numeric changes.
+
+Automatic review triggers
+Length ratio outside [0.5, 1.5]; changes in multisets of numeric expressions, supported date formats, bracketed numeric citations or URLs, and candidate proper names. Candidate names comprise consecutive capitalized words or uppercase acronyms. Date formats include numeric dates and full English month names followed by a day. Regex definitions are in src/edits/analyze.py. These triggers can include harmless reformulations and capitalization differences. Reviewers assess actual content changes by reading each pair.
+Sampling: for each condition, sort SHA256(seed|sample_id) and select ceil(20% * condition size); seed 42. Review-required pairs combine this sample with all triggered pairs. This creates 366 sampled pairs, 1,314 triggered pairs and a union of 1,415 pairs. Human review completed: 0.
+Copy review_required_pairs.csv to a working file before editing, preserving the delivered baseline checksums. Fill human_review_status with pass, fail or uncertain, plus human_reviewer and human_review_notes. Check names, dates, quantities, references, factual claims and preservation of the main meaning. Record the reason and affected passage for fail/uncertain. Preserve all original rows. A quality-approved subset analysis follows the completed review and belongs in a separate output directory.
+
+Detector analysis
+Use the frozen B and C pipelines selected in their validation experiments, with threshold 0.5. Model B is TF-IDF plus logistic regression. Model C is the full 32-feature random forest, including POS features. The bundle includes both frozen models and C's runtime feature code and POS resource. Module D performs inference on 2,095 distinct validation texts. Shared original texts are scored once and mapped back to their pairs.
+Detection rate = count(score >= 0.5) / pair count. Score change = edited score - original score. AI-to-human flip means original score >= 0.5 and edited score < 0.5. Two flip fractions use all pairs and detected originals as separate denominators. Human-to-AI reversals are also recorded.
+condition_summary.csv uses each condition's available pairs. common_cohort_summary.csv uses the same 225 original texts across all seven conditions, supporting comparisons at fixed parent membership. These are development-set descriptive results; validation also informed the original model choices. Final test evaluation and threshold analysis are scheduled for module E. All current results include the eligible pairs before human review.
+Five examples are selected by a separate fixed hash order, without using detection outcomes. The scatter plot displays normalized edit distance and score change for all 1,820 pairs. Repeated originals across editing conditions share a parent; statistical uncertainty analyses should resample parent groups.
+
+Completed AI review stage
+All 1,415 required pairs have saved AI dispositions: 210 pass, 1,078 fail, 127 uncertain. Human reviews: 0. Remaining 405 eligible pairs are unreviewed.
+716 structural failures were inspected through their final 140 characters; full semantic comparison was stopped at this completeness gate. 699 pairs received complete original/edited comparison. Model snapshot unknown. External fact checking was not performed.
+Codes: P content retained; T unfinished output; M editing commentary; O substantial omissions; C changed facts/details awaiting verification; U ambiguous context. Creative elaboration preserving the central plot may pass; changed characters, events, or endings are flagged.
+Some source originals contain embedded prompts and erroneous facts. Pass denotes judged content preservation. Factual corrections and additions receive uncertain status where verification is needed.
+The targeted reviewed pass subset has different parent membership across conditions. All-condition intersection: zero. Interpret each condition's before/after results with its own denominator. Keep the full published-edit analysis alongside it.
+Run python -m src.edits.review to regenerate reviewed_pairs.csv, quality_counts.csv, quality_pass_summary.csv and evidence examples from saved judgments. The baseline artifacts/module_d directory retains the pre-review stage and original pending human fields; artifacts/module_d_quality holds current AI dispositions.

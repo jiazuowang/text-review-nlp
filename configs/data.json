@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "repository": "Toloka/beemo",
+  "revision": "cca3b817eb6d0bf7a60f885f3022696553eabb63",
+  "filename": "dataset.parquet",
+  "expected_bytes": 8345056,
+  "expected_git_blob_sha1": "2970bb7f3bd8fe22bd037765dafde89a3ada1320",
+  "seed": 42,
+  "split_ratios": [0.7, 0.15, 0.15],
+  "min_words": 50,
+  "max_words": 1000,
+  "near_duplicate_jaccard": 0.9,
+  "near_duplicate_min_words": 50,
+  "shingle_words": 5
+}

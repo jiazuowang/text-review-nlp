@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "default_model": "X",
+  "default_selection_basis": "Highest validation macro_F1 among 34 extension candidates",
+  "models": {
+    "X": {
+      "path": "artifacts/extension_x/pipeline.joblib",
+      "sha256": "83bce8a291706773816d95851998a26502111b27eeaf33f9756ba151f75fc18b",
+      "thresholds": {
+        "default": 0.5,
+        "low_FPR": 0.9073438501767106
+      }
+    },
+    "B": {
+      "path": "resources/detectors/B/pipeline.joblib",
+      "sha256": "fcc52c7bed5e0ebb188fb906e789d250553ef1c65a8824c19dfa0cfd47877f3f",
+      "thresholds": {
+        "default": 0.5,
+        "low_FPR": 0.6422273813738966
+      }
+    },
+    "C": {
+      "path": "resources/detectors/C/pipeline.joblib",
+      "sha256": "1d67350027c7d3f0f97b72d15b518566cf65a1cc2688c0a9ff9677884c93d004",
+      "thresholds": {
+        "default": 0.5,
+        "low_FPR": 0.7522549703192121
+      }
+    }
+  },
+  "local_analysis": {
+    "model": "X",
+    "module": "src.evaluation.local_analysis",
+    "display_label": "Passage impact on the prediction",
+    "minimum_words": 1,
+    "maximum_words": null,
+    "authorship_validation": "Synthetic validation blocks; 68.33% window classification accuracy"
+  },
+  "writing_suggestions": [
+    "repeated_sentence",
+    "long_sentence",
+    "vague_evaluation"
+  ]
+}
